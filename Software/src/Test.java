@@ -13,5 +13,9 @@ public class Test {
         String name = sc.nextLine();
         Test obj = new Test();
         System.out.println("User entered " + obj.getData(name));
+        //testing student class
+        Student student = new Student();
+        student.getPersonalDetails(name,26,"M","sukesh@gmail.com");
+        student.getAddress("AD101","Rayagada","ODISHA",765019);
     }
 }
