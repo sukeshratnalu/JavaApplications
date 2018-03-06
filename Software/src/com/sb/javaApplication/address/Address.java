@@ -7,4 +7,7 @@ public class Address {
         System.out.println("State : " + state);
         System.out.println("PIN : " + pinCode);
     }
+    protected void getMobileNo(){
+        System.out.println("getting phone number from Address Class");
+    }
 }

@@ -8,6 +8,7 @@ public class MapExample {
         map.put("2","Santosh");
         map.put("3","Sukesh");
         map.put("4","Ramesh");
+        map.put("4","Suresh");
         System.out.println("Map Elements: " + map);
         System.out.println("Map Elements with 1: " + map.get("1"));
         System.out.println("values " + map.values());

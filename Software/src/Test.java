@@ -1,3 +1,5 @@
+import com.sb.javaApplication.address.Address;
+
 import java.util.Scanner;
 
 public class Test {
@@ -17,5 +19,7 @@ public class Test {
         Student student = new Student();
         student.getPersonalDetails(name,26,"M","sukesh@gmail.com");
         student.getAddress("AD101","Rayagada","ODISHA",765019);
+        student.getMobileNo(12345678);
+        Address add = new Address();
     }
 }

@@ -10,6 +10,11 @@ public class Student extends Address {
 
     }
 
+    public void getMobileNo(int no){
+        System.out.println("getting phone number from Student Class: "+no);
+        //super.getMobileNo();
+    }
+
 
 
 }
