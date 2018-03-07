@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Orders {
+
     public void listOredrDetails() throws IOException{
 
             FileReader freader = new FileReader("/home/semanticbits/IdeaProjects/JavaApplications/Software/src/com/sb/javaApplication/collectios/realTimeExample/orderDetails.txt");
@@ -17,6 +18,10 @@ public class Orders {
             freader.close();
 
 
+    }
+
+    public void getOrderDetails(){
+        //Gson gson = new Gson();
     }
 
     public static void main(String args[]) throws IOException{
