@@ -3,6 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+       <!-- <welcome-file>customerLogin.jsp</welcome-file>-->
+        <welcome-file>customerDetails.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.sb.customers.CustomerLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>CustomerServlet</servlet-name>
         <servlet-class>com.sb.customers.CustomerServlet</servlet-class>
@@ -11,9 +23,18 @@
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/customers</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>f1</filter-name>
+        <filter-class>com.sb.customers.CustomerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>f1</filter-name>
+        <url-pattern>/customers</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>CustomerDetailsServlet</servlet-name>
         <servlet-class>com.sb.customers.CustomerDetailsServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerDetailsServlet</servlet-name>
@@ -25,6 +46,22 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CustomerEditServlet</servlet-name>
-        <url-pattern>/customer/{id}/edit</url-pattern>
+        <url-pattern>/customer/edit</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CustomerDeleteServlet</servlet-name>
+        <servlet-class>com.sb.customers.CustomerDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerDeleteServlet</servlet-name>
+        <url-pattern>/customer/delete</url-pattern>
+    </servlet-mapping>
+    <!--<filter>
+        <filter-name>f2</filter-name>
+        <filter-class>com.sb.customers.CustomerEditFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>f2</filter-name>
+        <url-pattern>/customer/edit</url-pattern>
+    </filter-mapping>-->
 </web-app>

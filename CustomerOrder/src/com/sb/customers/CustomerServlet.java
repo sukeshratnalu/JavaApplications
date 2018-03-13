@@ -28,6 +28,7 @@ public class CustomerServlet extends HttpServlet {
         String gmail = request.getParameter("gmail");
         String address = request.getParameter("address");
         String pin = request.getParameter("pin");
+        String password = request.getParameter("password");
         Connection con=null;
         PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();
@@ -35,15 +36,16 @@ public class CustomerServlet extends HttpServlet {
         try{
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
-            ps=con.prepareStatement("INSERT INTO customers(name, mobile, addr, mail, pin) VALUES(?, ?, ?, ?, ?)");
+            ps=con.prepareStatement("INSERT INTO customers(name, mobile, addr, mail, pin, password) VALUES(?, ?, ?, ?, ?,?)");
             ps.setString(1, name);
             ps.setString(2, mobileNo);
             ps.setString(3, address);
             ps.setString(4, gmail);
             ps.setString(5, pin);
+            ps.setString(6, password);
             int i=ps.executeUpdate();
             if(i>0){
-                response.sendRedirect("/customer/details");
+                response.sendRedirect("/customerDetails.jsp");
             }
     }catch(Exception e){
             e.printStackTrace();

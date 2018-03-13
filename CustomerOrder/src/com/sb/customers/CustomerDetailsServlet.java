@@ -16,6 +16,7 @@ public class CustomerDetailsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
         Connection con=null;
         PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();
@@ -42,7 +43,7 @@ public class CustomerDetailsServlet extends HttpServlet {
                     "    background-color: #dddddd;\n" +
                     "}\n" +
                     "</style><html>";
-            htmlRespone += "<div><h2>Customer Details</h2>&nbsp&nbsp&nbsp&nbsp&nbsp<a href='/customer.html'>" +
+            htmlRespone += "<div><h1>Customer Details</h1>&nbsp&nbsp&nbsp&nbsp&nbsp<a href='/addCustomer.jsp'>" +
                     "Add New Customer</a></div></br></br><table><tr><th>Name</th><th>Mobile No</th><th>Gmail</th>" +
                     "<th>Address</th><th>Pin</th><th>Action</th></tr>";
             while (rs.next())
@@ -54,7 +55,7 @@ public class CustomerDetailsServlet extends HttpServlet {
                 String custPin = rs.getString("pin");
                 String custId = rs.getString("id");
                 htmlRespone += "<tr><td>"+custName+"</td><td>"+custMobileNo+"</td><td>"+custGmail+"</td><td>"+custAddress+
-                        "</td><td>"+custPin+"</td><td><a href='/customer/"+custId+"/edit'>Edit</a></tr>";
+                        "</td><td>"+custPin+"</td><td><a href='/customer/edit?id="+custId+"'>Edit</a>&nbsp&nbsp<a href='/customer/delete?id="+custId+"'> Delete </td></tr>";
             }
             htmlRespone += "</table></html>";
             writer.println(htmlRespone);
