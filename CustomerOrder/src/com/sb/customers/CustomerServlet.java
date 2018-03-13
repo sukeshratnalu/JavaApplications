@@ -1,20 +1,14 @@
 package com.sb.customers;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.*;
 
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/a/b/c", "/customers"})
+//@WebServlet(name = "CustomerServlet", urlPatterns = {"/a/b/c", "/customers"})
 public class CustomerServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,30 +28,27 @@ public class CustomerServlet extends HttpServlet {
         String gmail = request.getParameter("gmail");
         String address = request.getParameter("address");
         String pin = request.getParameter("pin");
-
+        Connection con=null;
+        PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();
-        String htmlRespone = "<style>\n" +
-                "table {\n" +
-                "    font-family: arial, sans-serif;\n" +
-                "    border-collapse: collapse;\n" +
-                "    width: 100%;\n" +
-                "}\n" +
-                "\n" +
-                "td, th {\n" +
-                "    border: 1px solid #dddddd;\n" +
-                "    text-align: left;\n" +
-                "    padding: 8px;\n" +
-                "}\n" +
-                "\n" +
-                "tr:nth-child(even) {\n" +
-                "    background-color: #dddddd;\n" +
-                "}\n" +
-                "</style><html>";
-        htmlRespone += "<table><tr><th>Name</th><th>Mobile No</th><th>Gmail</th><th>Address</th><th>Pin</th></th>";
-        htmlRespone += "<tr><td>"+name+"</td><td>"+mobileNo+"</td><td>"+gmail+"</td><td>"+address+"</td><td>"+pin+"</td></tr>";
-        htmlRespone += "</table></html>";
 
-        writer.println(htmlRespone);
+        try{
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
+            ps=con.prepareStatement("INSERT INTO customers(name, mobile, addr, mail, pin) VALUES(?, ?, ?, ?, ?)");
+            ps.setString(1, name);
+            ps.setString(2, mobileNo);
+            ps.setString(3, address);
+            ps.setString(4, gmail);
+            ps.setString(5, pin);
+            int i=ps.executeUpdate();
+            if(i>0){
+                response.sendRedirect("/customer/details");
+            }
+    }catch(Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 }

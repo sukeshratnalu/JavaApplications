@@ -3,4 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>com.sb.customers.CustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/customers</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CustomerDetailsServlet</servlet-name>
+        <servlet-class>com.sb.customers.CustomerDetailsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerDetailsServlet</servlet-name>
+        <url-pattern>/customer/details</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CustomerEditServlet</servlet-name>
+        <servlet-class>com.sb.customers.CustomerEditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerEditServlet</servlet-name>
+        <url-pattern>/customer/{id}/edit</url-pattern>
+    </servlet-mapping>
 </web-app>
