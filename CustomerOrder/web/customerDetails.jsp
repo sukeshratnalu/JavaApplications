@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ include file="index.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -18,7 +19,7 @@
     Statement statement = null;
     ArrayList customerList = new ArrayList();
     try {
-        Class.forName("org.postgresql.Driver");
+        Class.forName(application.getInitParameter("dname"));
     } catch (ClassNotFoundException e) {
         System.out.println("Where is your PostgreSQL JDBC Driver? "
                 + "Include in your library path!");
@@ -26,7 +27,7 @@
         return;
     }
     try{
-        con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
+        con = DriverManager.getConnection(application.getInitParameter("connectionObj"), application.getInitParameter("userName"), application.getInitParameter("password"));
         String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers";
         statement = con.createStatement();
         ResultSet rs = statement.executeQuery(query);

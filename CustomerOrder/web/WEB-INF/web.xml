@@ -56,6 +56,26 @@
         <servlet-name>CustomerDeleteServlet</servlet-name>
         <url-pattern>/customer/delete</url-pattern>
     </servlet-mapping>
+    <context-param>
+        <param-name>dname</param-name>
+        <param-value>org.postgresql.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>connectionObj</param-name>
+        <param-value>jdbc:postgresql://localhost:5432/customer_orders</param-value>
+    </context-param>
+    <context-param>
+        <param-name>userName</param-name>
+        <param-value>customer</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>customer</param-value>
+    </context-param>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
     <!--<filter>
         <filter-name>f2</filter-name>
         <filter-class>com.sb.customers.CustomerEditFilter</filter-class>
