@@ -12,7 +12,7 @@ import java.sql.*;
 @WebServlet(name = "CustomerEditServlet")
 public class CustomerEditServlet extends HttpServlet {
     String custId = "";
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // code to process the form...
         String name = request.getParameter("name");
         String mobileNo = request.getParameter("mobileNo");
@@ -40,7 +40,7 @@ public class CustomerEditServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection con=null;
         PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();

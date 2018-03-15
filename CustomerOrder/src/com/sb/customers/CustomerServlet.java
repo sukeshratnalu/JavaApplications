@@ -11,15 +11,15 @@ import java.sql.*;
 //@WebServlet(name = "CustomerServlet", urlPatterns = {"/a/b/c", "/customers"})
 public class CustomerServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
-        pw.println("<h1>Customers</h1>");
-        pw.println("<h1>Customers Details</h1>");
+        //pw.println("<h1>Customers</h1>");
+        //pw.println("<h1>Customers Details</h1>");
 
     }
 
-    protected void doPost(HttpServletRequest request,
+    public void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
         // code to process the form...
