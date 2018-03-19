@@ -1,5 +1,6 @@
 package com.sb.customers;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +35,10 @@ public class CustomerServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         try{
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
+            ServletContext context=getServletContext();
+            Class.forName(context.getInitParameter("dname"));
+            con = DriverManager.getConnection(context.getInitParameter("connectionObj"),
+                    context.getInitParameter("userName"), context.getInitParameter("password"));
             ps=con.prepareStatement("INSERT INTO customers(name, mobile, addr, mail, pin, password) VALUES(?, ?, ?, ?, ?,?)");
             ps.setString(1, name);
             ps.setString(2, mobileNo);

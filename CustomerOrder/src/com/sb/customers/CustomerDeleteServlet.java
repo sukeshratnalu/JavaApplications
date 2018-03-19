@@ -16,7 +16,7 @@ public class CustomerDeleteServlet extends HttpServlet {
 
     }*/
     String custId = "";
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = "id";
         custId = request.getParameter(id);
         Connection conn = null;

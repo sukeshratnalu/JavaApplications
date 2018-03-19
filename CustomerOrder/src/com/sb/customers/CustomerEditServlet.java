@@ -11,7 +11,7 @@ import java.sql.*;
 
 @WebServlet(name = "CustomerEditServlet")
 public class CustomerEditServlet extends HttpServlet {
-    String custId = "";
+    String custId = null;
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // code to process the form...
         String name = request.getParameter("name");

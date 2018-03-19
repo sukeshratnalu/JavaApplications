@@ -1,5 +1,6 @@
 package com.sb.customers;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +12,20 @@ import java.sql.*;
 
 @WebServlet(name = "CustomerDetailsServlet")
 public class CustomerDetailsServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         Connection con=null;
         PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();
         try{
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
+            ServletContext context=getServletContext();
+            Class.forName(context.getInitParameter("dname"));
+            con = DriverManager.getConnection(context.getInitParameter("connectionObj"),
+                    context.getInitParameter("userName"), context.getInitParameter("password"));
             String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(query);
@@ -60,7 +63,7 @@ public class CustomerDetailsServlet extends HttpServlet {
             htmlRespone += "</table></html>";
             writer.println(htmlRespone);
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 }
