@@ -1,4 +1,7 @@
-package com.sb.customers;
+package com.sb.customers.service;
+
+import com.sb.customers.bean.EditCustomerBean;
+import com.sb.customers.util.DbConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,24 +22,18 @@ public class CustomerEditServlet extends HttpServlet {
         String gmail = request.getParameter("gmail");
         String address = request.getParameter("address");
         String pin = request.getParameter("pin");
-        Connection con=null;
-        PreparedStatement ps=null;
-        Statement st = null;
-        PrintWriter writer = response.getWriter();
-
-        try{
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
-            st = con.createStatement();
-            String sql = "UPDATE customers " +
-                    "SET name = '"+name+"', mobile = '"+mobileNo+"', mail ='"+gmail+"', addr = '"+address+"', pin = '"+pin+"' WHERE id in ("+custId+")";
-            int i = st.executeUpdate(sql);
+        EditCustomerBean editCustomerBean = new EditCustomerBean();
+        editCustomerBean.setName(name);
+        editCustomerBean.setMobileNo(mobileNo);
+        editCustomerBean.setGmail(gmail);
+        editCustomerBean.setAddress(address);
+        editCustomerBean.setPin(pin);
+        int i = editCustomerBean.editCustomer(custId);
             if(i>0){
                 response.sendRedirect("/customerDetails.jsp");
+            }else {
+                System.out.println("error");
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
     }
 
@@ -47,8 +44,8 @@ public class CustomerEditServlet extends HttpServlet {
         String id = "id";
         custId = request.getParameter(id);
         try{
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
+
+            con = DbConnection.getDbConnection();
             String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers WHERE id="+custId;
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(query);

@@ -1,5 +1,5 @@
-import com.sb.customers.CustomerEditServlet;
-import com.sb.customers.CustomerServlet;
+import com.sb.customers.service.CustomerEditServlet;
+import com.sb.customers.service.CustomerServlet;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,6 +20,8 @@ public class CustomerEditTest {
     @Mock
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
+    ResultSet resultSet = mock(ResultSet.class);
+    Statement statement = mock(Statement.class);
     @InjectMocks
     private CustomerServlet customerServlet;
     @Test
@@ -39,7 +43,7 @@ public class CustomerEditTest {
             }
         };
         when(response.getWriter()).thenReturn(new PrintWriter(out));
-        when(request.getParameter("id")).thenReturn("42");
+        when(request.getParameter("id")).thenReturn("2");
         new CustomerEditServlet().doGet(request, response);
         new CustomerEditServlet().doPost(request, response);
 

@@ -1,4 +1,4 @@
-import com.sb.customers.CustomerDetailsServlet;
+import com.sb.customers.service.CustomerDetailsServlet;
 import org.junit.Test;
 import org.mockito.Mock;
 

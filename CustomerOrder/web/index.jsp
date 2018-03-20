@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body >
- <h1 style="text-align: center">DEMO APPLICATION FOR SERVLET AND JSP</h1>
+ <h1 style="text-align: center">DEMO APPLICATION FOR SERVLET AND JSP</h1><a href="login.jsp">Logout</a>
   </body>
 </html>

@@ -1,6 +1,5 @@
-import com.sb.customers.CustomerFilter;
+import com.sb.customers.service.CustomerFilter;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import javax.servlet.*;

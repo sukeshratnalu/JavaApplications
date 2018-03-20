@@ -1,5 +1,9 @@
-package com.sb.customers;
+package com.sb.customers.service;
 
+import com.sb.customers.bean.DeleteCustomerBean;
+import com.sb.customers.util.DbConnection;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,20 +22,18 @@ public class CustomerDeleteServlet extends HttpServlet {
     String custId = "";
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = "id";
+        Boolean isDeleted=false;
         custId = request.getParameter(id);
         Connection conn = null;
         Statement stmt = null;
-        try{
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/customer_orders", "customer", "customer");
-            stmt = conn.createStatement();
-            String sql = "DELETE FROM customers " +
-                    "WHERE id = "+custId;
-            stmt.executeUpdate(sql);
-            stmt.executeUpdate(sql);
+        DeleteCustomerBean deleteCustomerBean = new DeleteCustomerBean();
+        deleteCustomerBean.setId(custId);
+        isDeleted = deleteCustomerBean.deleteCustomer();
+        if(isDeleted){
             response.sendRedirect("/customerDetails.jsp");
-        }catch (Exception e){
-            e.printStackTrace();
+        }else{
+
         }
+
     }
 }

@@ -1,4 +1,7 @@
-package com.sb.customers;
+package com.sb.customers.service;
+
+import com.sb.customers.bean.ListCustomersBean;
+import com.sb.customers.util.DbConnection;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
 @WebServlet(name = "CustomerDetailsServlet")
 public class CustomerDetailsServlet extends HttpServlet {
@@ -21,11 +25,14 @@ public class CustomerDetailsServlet extends HttpServlet {
         Connection con=null;
         PreparedStatement ps=null;
         PrintWriter writer = response.getWriter();
+        ListCustomersBean listCustomersBean = new ListCustomersBean();
+        ArrayList customerList = listCustomersBean.listCustomers();
+        System.out.println("customerList");
+        System.out.println(customerList);
         try{
+
             ServletContext context=getServletContext();
-            Class.forName(context.getInitParameter("dname"));
-            con = DriverManager.getConnection(context.getInitParameter("connectionObj"),
-                    context.getInitParameter("userName"), context.getInitParameter("password"));
+            con = DbConnection.getDbConnection();
             String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(query);

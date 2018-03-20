@@ -1,4 +1,4 @@
-import com.sb.customers.CustomerEditFilter;
+import com.sb.customers.service.CustomerEditFilter;
 import org.junit.Test;
 import org.mockito.Mock;
 
