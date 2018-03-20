@@ -30,7 +30,7 @@ public class CustomerDeleteServlet extends HttpServlet {
         deleteCustomerBean.setId(custId);
         isDeleted = deleteCustomerBean.deleteCustomer();
         if(isDeleted){
-            response.sendRedirect("/customerDetails.jsp");
+            response.sendRedirect("/customer/details");
         }else{
 
         }

@@ -37,7 +37,7 @@ public class CustomerServlet extends HttpServlet {
         addCustomerBean.setPin(pin);
         int i=addCustomerBean.addCustomer();
         if(i>0){
-            response.sendRedirect("/customerDetails.jsp");
+            response.sendRedirect("/customer/details");
         }else{
             System.out.println("error");
         }

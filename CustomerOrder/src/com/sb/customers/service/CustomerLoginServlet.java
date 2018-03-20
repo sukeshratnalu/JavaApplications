@@ -23,15 +23,9 @@ public class CustomerLoginServlet extends HttpServlet {
         bean.setPassword(password);
         request.setAttribute("bean",bean);
         //getting connection data
-        ServletContext servletContext = getServletContext();
-        String dbName = servletContext.getInitParameter("dname");
-        String connectionObj = servletContext.getInitParameter("connectionObj");
-        String user = servletContext.getInitParameter("userName");
-        String dbPassword = servletContext.getInitParameter("password");
-        boolean status=bean.validate(dbName, connectionObj, user, dbPassword);
+        boolean status=bean.validate();
         if(status){
-            RequestDispatcher rd=request.getRequestDispatcher("customerDetails.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("/customer/details");
         }
         else{
             RequestDispatcher rd=request.getRequestDispatcher("login.jsp");

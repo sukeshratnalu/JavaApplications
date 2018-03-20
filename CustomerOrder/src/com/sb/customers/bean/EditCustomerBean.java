@@ -1,10 +1,10 @@
 package com.sb.customers.bean;
 
 import com.sb.customers.util.DbConnection;
+import com.sb.customers.util.QueryConstant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 public class EditCustomerBean {
     String name, mobileNo, gmail, address, pin;
@@ -52,14 +52,22 @@ public class EditCustomerBean {
     public int editCustomer(String custId){
         int i = 0;
         Connection connection = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
+        String sql = QueryConstant.CUSTOMER_UPDATE_QUERY;
         try{
             connection = DbConnection.getDbConnection();
-            String sql = "UPDATE customers " +
-                    "SET name = '"+name+"', mobile = '"+mobileNo+"', mail ='"+gmail+"', addr = '"+address+"', pin = '"+pin+"' WHERE id in ("+custId+")";
-             i = statement.executeUpdate(sql);
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, mobileNo);
+            preparedStatement.setString(3, gmail);
+            preparedStatement.setString(4, address);
+            preparedStatement.setString(5, pin);
+            preparedStatement.setInt(6, Integer.parseInt(custId));
+            i=preparedStatement.executeUpdate();
+
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
+            System.out.println("edit"+e);
         }
         return i;
     }

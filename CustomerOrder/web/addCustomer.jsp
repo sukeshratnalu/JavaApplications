@@ -19,11 +19,11 @@
 
     <h1>Add Customer Details</h1>
     <form name="customerForm" method="post" action="/customers">
-    <b>Name:</b> <br/><input type="text" name="name"/> <br/>
-    <b>Password:</b> <br/><input type="password" name="password"/> <br/>
-    <b>Mobile No:</b>  <br/><input type="text" name="mobileNo"/> <br/>
-    <b>Gmail:</b> <br/><input type="text" name="gmail"/> <br/>
-    <b>Address:</b> <br/><input type="text" name="address"/> <br/>
+    <b>Name:</b> <br/><input type="text" name="name"/> <br/><br/>
+    <b>Password:</b> <br/><input type="password" name="password"/> <br/><br/>
+    <b>Mobile No:</b>  <br/><input type="text" name="mobileNo"/> <br/><br/>
+    <b>Gmail:</b> <br/><input type="text" name="gmail"/> <br/><br/>
+    <b>Address:</b> <br/><input type="text" name="address"/> <br/><br/>
     <b>PIN:</b> <br/><input type="text" name="pin"/> <br/><br/><br/>
         <input type="submit" value="Submit" />
     </form>

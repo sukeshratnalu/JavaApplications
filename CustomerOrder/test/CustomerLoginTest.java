@@ -47,8 +47,7 @@ public class CustomerLoginTest {
         when(request.getParameter("password")).thenReturn("skr");
         bean.setName("Sukesh kumar");
         bean.setPassword("skr");
-        when(bean.validate("org.postgresql.Driver","jdbc:postgresql://localhost:5432/customer_orders",
-                "customer","customer")).thenReturn(true);
+        when(bean.validate()).thenReturn(true);
         customerLoginServlet.doPost(request, response);
 
 

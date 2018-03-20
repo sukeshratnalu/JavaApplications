@@ -1,9 +1,10 @@
 package com.sb.customers.bean;
 
 import com.sb.customers.util.DbConnection;
+import com.sb.customers.util.QueryConstant;
 
 import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 public class DeleteCustomerBean {
     private String id;
@@ -19,12 +20,13 @@ public class DeleteCustomerBean {
     public Boolean deleteCustomer(){
         int i = 0;
         Connection connection = null;
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
+        String query = QueryConstant.CUSTOMER_DELETE_QUERY;
         try{
             connection = DbConnection.getDbConnection();
-            statement = connection.createStatement();
-            String sql = "DELETE FROM customers WHERE id = "+this.id;
-            i=statement.executeUpdate(sql);
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Integer.parseInt(id));
+            i=preparedStatement.executeUpdate();
         }catch (Exception e){
             System.out.println(e);
         }

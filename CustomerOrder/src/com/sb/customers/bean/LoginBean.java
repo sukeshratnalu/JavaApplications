@@ -1,6 +1,7 @@
 package com.sb.customers.bean;
 
 import com.sb.customers.util.DbConnection;
+import com.sb.customers.util.QueryConstant;
 
 import java.sql.*;
 
@@ -19,15 +20,17 @@ public class LoginBean {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean validate(String dbName, String connectionObj, String dbUserName, String dbPassword){
-        Connection con=null;
-        PreparedStatement ps=null;
+    public boolean validate(){
+        Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        String query = QueryConstant.CUSTOMER_LOGIN_SELECT_QUERY;
         int count = 0;
         try{
-            con = DbConnection.getDbConnection();
-            String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers WHERE name='"+name+"' AND password ='"+password+"'";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(query);
+            connection = DbConnection.getDbConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,password);
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next())
             {
                 count++;

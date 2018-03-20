@@ -30,7 +30,7 @@ public class CustomerEditServlet extends HttpServlet {
         editCustomerBean.setPin(pin);
         int i = editCustomerBean.editCustomer(custId);
             if(i>0){
-                response.sendRedirect("/customerDetails.jsp");
+                response.sendRedirect("/customer/details");
             }else {
                 System.out.println("error");
             }

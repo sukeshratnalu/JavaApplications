@@ -9,9 +9,7 @@ public class LoginBeanTest {
         loginBean.getName();
         loginBean.setPassword("skr");
         loginBean.getPassword();
-        loginBean.validate("org.postgresql.Driver","jdbc:postgresql://localhost:5432/customer_orders",
-                "customer","customer");
-        loginBean.validate("org.postgresql.Driver","jdbc:postgresql://localhost:5432/customer_orders",
-                "customer","custome1");
+        loginBean.validate();
+        loginBean.validate();
     }
 }

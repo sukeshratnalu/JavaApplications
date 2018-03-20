@@ -1,6 +1,7 @@
 package com.sb.customers.bean;
 
 import com.sb.customers.util.DbConnection;
+import com.sb.customers.util.QueryConstant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,7 +63,7 @@ public class AddCustomerBean {
         PreparedStatement preparedStatement = null;
         try{
            connection = DbConnection.getDbConnection();
-            preparedStatement=connection.prepareStatement("INSERT INTO customers(name, mobile, addr, mail, pin, password) VALUES(?, ?, ?, ?, ?,?)");
+            preparedStatement=connection.prepareStatement(QueryConstant.CUSTOMER_INSERT_QUERY);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, mobileNo);
             preparedStatement.setString(3, address);

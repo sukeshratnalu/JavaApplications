@@ -1,6 +1,7 @@
 package com.sb.customers.bean;
 
 import com.sb.customers.util.DbConnection;
+import com.sb.customers.util.QueryConstant;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +12,15 @@ import java.util.Map;
 
 public class ListCustomersBean {
     //ArrayList eachCustomerList = new ArrayList();
-    ArrayList customerList = new ArrayList();
+    Map customerData = new HashMap();
 
 
-    public ArrayList listCustomers(){
+    public Map listCustomers(){
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DbConnection.getDbConnection();
-            String query = "SELECT id, name, mobile, mail, addr, pin  FROM   customers";
+            String query = QueryConstant.CUSTOMER_SELECT_QUERY;
             statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
@@ -29,14 +30,13 @@ public class ListCustomersBean {
                 eachCustomerList.add(rs.getString("mail"));
                 eachCustomerList.add(rs.getString("addr"));
                 eachCustomerList.add(rs.getString("pin"));
-                eachCustomerList.add(rs.getString("id"));
-                customerList.add(eachCustomerList);
+                customerData.put(rs.getString("id"),eachCustomerList);
 
             }
 
         }catch (Exception e){
             System.out.println(e);
         }
-        return customerList;
+        return customerData;
     }
 }
